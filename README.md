@@ -57,7 +57,7 @@ helm repo list
 
 ```
 
-## # Search Helm Repository
+## Search Helm Repository
 ```bash
 helm search repo <KEY-WORD>
 helm search repo nginx
@@ -97,4 +97,5 @@ helm list --output=json
 helm list --namespace=default
 helm list -n default
 
+helm list -n dev 
 ```

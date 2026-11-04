@@ -55,13 +55,16 @@ helm repo add mybitnami https://charts.bitnami.com/bitnami
 # List Helm Repositories
 helm repo list
 
-# Search Helm Repository
+```
+
+## # Search Helm Repository
+```bash
 helm search repo <KEY-WORD>
 helm search repo nginx
 helm search repo apache
 helm search repo wildfly
-
 ```
+
 ## Install Helm Chart
 ```bash 
 
@@ -71,5 +74,27 @@ helm repo update  # Make sure we get the latest list of charts
 # Install Helm Chart
 helm install <RELEASE-NAME> <repo_name_in_your_local_desktop/chart_name>
 helm install mynginx mybitnami/nginx
+
+# Install helm chart in specific namespace
+helm install mynginx mybitnami/nginx --create-namespace dev 
+
+```
+
+## List Helm Releases
+```bash 
+
+# List Helm Releases (Default Table Output)
+helm list 
+helm ls
+
+# List Helm Releases (YAML Output)
+helm list --output=yaml
+
+# List Helm Releases (JSON Output)
+helm list --output=json
+
+# List Helm Releases with namespace flag
+helm list --namespace=default
+helm list -n default
 
 ```

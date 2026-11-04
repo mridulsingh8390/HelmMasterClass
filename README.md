@@ -137,3 +137,35 @@ helm uninstall mynginx
 helm uninstall mynginx -n dev 
 
 ```
+
+## Helm Upgrade with set option
+
+```bash 
+
+# List Helm Repositories
+helm repo list
+
+# Add Helm Repository
+helm repo add <DESIRED-NAME> <HELM-REPO-URL>
+helm repo add mybitnami https://charts.bitnami.com/bitnami
+
+# List Helm Repositories
+helm repo list
+
+
+# Update Helm Repo
+helm repo update  # Make sure we get the latest list of charts
+
+# Install Helm Chart
+helm install <RELEASE-NAME> <repo_name_in_your_local_desktop/chart_name>
+helm install mynginx mybitnami/nginx
+
+# Install helm chart in specific namespace
+helm install mynginx mybitnami/nginx --create-namespace dev 
+
+
+# Helm Upgrade
+helm upgrade <RELEASE-NAME> <repo_name_in_your_local_desktop/chart_name> --set <OVERRIDE-VALUE-FROM-values.yaml>
+helm upgrade mynginx mybitnami/nginx --set "image.tag=1.14.2"
+
+```

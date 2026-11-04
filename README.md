@@ -1,6 +1,6 @@
 # Helm MasterClass
 
-## Step:1 - Install Docker and HELM CLI and Kind Env Setup
+## Install Docker and HELM CLI and Kind Env Setup
 
 ```bash
 # Install Docker and Kind Cluster env.
@@ -130,31 +130,47 @@ helm uninstall mynginx -n dev
 
 ```bash 
 
-# List Helm Repositories
 helm repo list
 
 # Add Helm Repository
 helm repo add <DESIRED-NAME> <HELM-REPO-URL>
-helm repo add mybitnami https://charts.bitnami.com/bitnami
+helm repo add stacksimplify https://stacksimplify.github.io/helm-charts/
 
 # List Helm Repositories
 helm repo list
 
+# Search Helm Repository
+helm search repo <KEY-WORD>
+helm search repo mychart1
 
-# Update Helm Repo
-helm repo update  # Make sure we get the latest list of charts
-
-# Install Helm Chart
+# Install myapp1 Helm Chart
 helm install <RELEASE-NAME> <repo_name_in_your_local_desktop/chart_name>
-helm install mynginx mybitnami/nginx 
+helm install myapp1 stacksimplify/mychart1 
 
-# Install helm chart in specific namespace
-helm install mynginx mybitnami/nginx --create-namespace dev 
 
+# List Helm Release
+helm ls 
+or 
+helm list
+
+# List Pods
+kubectl get pods
+
+# List Services 
+kubectl get svc
+
+# Access Application
+http://localhost:<NODE-PORT>
+http://localhost:31231
+
+# Review the Docker Image Versions we are using
+https://github.com/users/stacksimplify/packages/container/package/kubenginx
+Image Tags: 1.0.0, 2.0.0, 3.0.0, 4.0.0
 
 # Helm Upgrade
 helm upgrade <RELEASE-NAME> <repo_name_in_your_local_desktop/chart_name> --set <OVERRIDE-VALUE-FROM-values.yaml>
-helm upgrade mynginx mybitnami/nginx -n dev --set "image.tag=1.14.2"
+helm upgrade myapp1 stacksimplify/mychart1 --set "image.tag=2.0.0"
+
 
 ```
 
@@ -167,11 +183,11 @@ helm list
 Observation: We should see Revision as 2
 
 # Additional List commands
-helm list -n dev --superseded
-helm list -n dev --deployed
+helm list --superseded
+helm list --deployed
 
 # List and Describe Pod
-kubectl get pods -n dev
+kubectl get pods
 kubectl describe pod <POD-NAME> 
 Observation: In the Pod Events you should find that "ghcr.io/stacksimplify/kubenginx:2.0.0" is pulled or if already exists on desktop it will be used to create this new pod
 
@@ -179,6 +195,24 @@ Observation: In the Pod Events you should find that "ghcr.io/stacksimplify/kuben
 http://localhost:<NODE-PORT>
 http://localhost:31231
 Observation: Version 2 of application should be displayed
+
+
+# Helm Upgrade to 3.0.0
+helm upgrade myapp1 kalyan-repo/myapp1 --set "image.tag=3.0.0"
+
+# Access Application
+http://localhost:<NODE-PORT>
+http://localhost:31231
+
+# Helm Upgrade to 4.0.0
+helm upgrade myapp1 kalyan-repo/myapp1 --set "image.tag=4.0.0"
+
+# Access Application
+http://localhost:<NODE-PORT>
+http://localhost:31231
+
+
+
 
 ```
 
@@ -188,23 +222,24 @@ Observation: Version 2 of application should be displayed
 
 # helm history
 helm history RELEASE_NAME
+helm history myapp1
 
-helm history mynginx -n dev
+
 
 
 # Helm Status
 helm status RELEASE_NAME
-helm status mynginx -n dev
+helm status myapp1
 
 # Helm Status - Show Description (display the description message of the named release)
-helm status mynginx -n dev --show-desc    
+helm status myapp1 --show-desc    
 
 # Helm Status - Show Resources (display the resources of the named release)
-helm status mynginx  -n dev --show-resources   
+helm status myapp1  --show-resources   
 
 # Helm Status - revision (display the status of the named release with revision)
 helm status RELEASE_NAME --revision int
-helm status mynginx  -n dev --revision 2
+helm status myapp1 --revision 2
 
 ```
 
@@ -213,7 +248,9 @@ helm status mynginx  -n dev --revision 2
 ```bash 
 
 # Uninstall Helm Release
-helm uninstall mynginx -n dev
+helm uninstall myapp1
+
+
 
 ```
 

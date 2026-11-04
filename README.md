@@ -1,6 +1,6 @@
-# helm MasterClass
+# Helm MasterClass
 
-## Install Docker and HELM CLI and Kind Env Setup
+## Step:1 - Install Docker and HELM CLI and Kind Env Setup
 
 ```bash
 # Install Docker and Kind Cluster env.
@@ -31,4 +31,45 @@ kubectl version --client
 
 kubectl cluster-info
 kubectl get nodes
+
+# List Config Contexts
+kubectl config get-contexts
+
+# Config Current Context
+kubectl config current-context
+
+```
+## Add Repo
+
+```bash 
+
+# Add Bitnami Repo
+
+# List Helm Repositories
+helm repo list
+
+# Add Helm Repository
+helm repo add <DESIRED-NAME> <HELM-REPO-URL>
+helm repo add mybitnami https://charts.bitnami.com/bitnami
+
+# List Helm Repositories
+helm repo list
+
+# Search Helm Repository
+helm search repo <KEY-WORD>
+helm search repo nginx
+helm search repo apache
+helm search repo wildfly
+
+```
+## Install Helm Chart
+```bash 
+
+# Update Helm Repo
+helm repo update  # Make sure we get the latest list of charts
+
+# Install Helm Chart
+helm install <RELEASE-NAME> <repo_name_in_your_local_desktop/chart_name>
+helm install mynginx mybitnami/nginx
+
 ```

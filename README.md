@@ -212,8 +212,6 @@ http://localhost:<NODE-PORT>
 http://localhost:31231
 
 
-
-
 ```
 
 ## Helm History and Status
@@ -223,9 +221,6 @@ http://localhost:31231
 # helm history
 helm history RELEASE_NAME
 helm history myapp1
-
-
-
 
 # Helm Status
 helm status RELEASE_NAME
@@ -272,12 +267,9 @@ helm repo list
 helm search repo <KEY-WORD>
 helm search repo mychart1
 
-
-
 # Install myapp1 Helm Chart
 helm install <RELEASE-NAME> <repo_name_in_your_local_desktop/chart_name>
 helm install myapp1 stacksimplify/mychart1 
-
 
 
 # List Helm Release
@@ -296,8 +288,6 @@ http://localhost:<NODE-PORT>
 http://localhost:31231
 
 
-
-
 # Review the Docker Image Versions we are using
 https://github.com/users/stacksimplify/packages/container/package/kubenginx
 Image Tags: 1.0.0, 2.0.0, 3.0.0, 4.0.0
@@ -305,7 +295,6 @@ Image Tags: 1.0.0, 2.0.0, 3.0.0, 4.0.0
 # Helm Upgrade
 helm upgrade <RELEASE-NAME> <repo_name_in_your_local_desktop/chart_name> --set <OVERRIDE-VALUE-FROM-values.yaml>
 helm upgrade myapp1 stacksimplify/mychart1 --set "image.tag=2.0.0"
-
 
 
 # List Helm Releases
@@ -325,7 +314,6 @@ Observation: In the Pod Events you should find that "ghcr.io/stacksimplify/kuben
 http://localhost:<NODE-PORT>
 http://localhost:31231
 Observation: Version 2 of application should be displayed
-
 
 
 # Helm Upgrade to 3.0.0
@@ -386,7 +374,6 @@ helm status qa101 --show-resources
 http://localhost:31231
 
 
-
 helm install qa101 stacksimplify/mychart1
 
 # List Helm Release
@@ -401,7 +388,6 @@ helm uninstall qa101
 
 # List Helm Release
 helm list 
-
 
 
 helm install qa101 stacksimplify/mychart1 --atomic

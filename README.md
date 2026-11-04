@@ -98,8 +98,12 @@ helm ls -n dev
 # List Helm Releases (YAML Output)
 helm list --output=yaml
 
+helm list -n dev  --output=yaml
+
 # List Helm Releases (JSON Output)
 helm list --output=json
+
+helm list -n dev  --output=json
 
 # List Helm Releases with namespace flag
 helm list --namespace=default
@@ -116,8 +120,13 @@ helm list -n dev
 # List Kubernetes Pods
 kubectl get pods
 
+kubectl get pod -n dev 
+
 # List Kubernetes Services
 kubectl get svc
+
+kubectl get svc -n dev 
+
 Observation: Review the EXTERNAL-IP field and you will see it as localhost. Access the nginx page from local desktop localhost
 
 # Access Nginx Application on local desktop browser
@@ -166,7 +175,7 @@ helm repo update  # Make sure we get the latest list of charts
 
 # Install Helm Chart
 helm install <RELEASE-NAME> <repo_name_in_your_local_desktop/chart_name>
-helm install mynginx mybitnami/nginx
+helm install mynginx mybitnami/nginx 
 
 # Install helm chart in specific namespace
 helm install mynginx mybitnami/nginx --create-namespace dev 

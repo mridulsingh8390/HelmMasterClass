@@ -145,19 +145,19 @@ helm search repo mychart1
 
 # Install myapp1 Helm Chart
 helm install <RELEASE-NAME> <repo_name_in_your_local_desktop/chart_name>
-helm install myapp1 stacksimplify/mychart1 
+helm install myapp1 stacksimplify/mychart1   --create-namespace -n dev  
 
 
 # List Helm Release
-helm ls 
+helm ls -n dev 
 or 
-helm list
+helm list -n dev 
 
 # List Pods
-kubectl get pods
+kubectl get pods -n dev 
 
 # List Services 
-kubectl get svc
+kubectl get svc -n dev 
 
 # Access Application
 http://localhost:<NODE-PORT>
@@ -169,7 +169,7 @@ Image Tags: 1.0.0, 2.0.0, 3.0.0, 4.0.0
 
 # Helm Upgrade
 helm upgrade <RELEASE-NAME> <repo_name_in_your_local_desktop/chart_name> --set <OVERRIDE-VALUE-FROM-values.yaml>
-helm upgrade myapp1 stacksimplify/mychart1 --set "image.tag=2.0.0"
+helm upgrade myapp1 stacksimplify/mychart1 -n dev  --set "image.tag=2.0.0"
 
 
 ```
@@ -183,12 +183,12 @@ helm list
 Observation: We should see Revision as 2
 
 # Additional List commands
-helm list --superseded
-helm list --deployed
+helm list -n dev  --superseded
+helm list -n dev  --deployed
 
 # List and Describe Pod
-kubectl get pods
-kubectl describe pod <POD-NAME> 
+kubectl get pods -n dev 
+kubectl describe pod <POD-NAME>  -n dev 
 Observation: In the Pod Events you should find that "ghcr.io/stacksimplify/kubenginx:2.0.0" is pulled or if already exists on desktop it will be used to create this new pod
 
 # Access Application
@@ -198,14 +198,14 @@ Observation: Version 2 of application should be displayed
 
 
 # Helm Upgrade to 3.0.0
-helm upgrade myapp1 kalyan-repo/myapp1 --set "image.tag=3.0.0"
+helm upgrade myapp1 kalyan-repo/myapp1 -n dev  --set "image.tag=3.0.0"
 
 # Access Application
 http://localhost:<NODE-PORT>
 http://localhost:31231
 
 # Helm Upgrade to 4.0.0
-helm upgrade myapp1 kalyan-repo/myapp1 --set "image.tag=4.0.0"
+helm upgrade myapp1 kalyan-repo/myapp1 -n dev  --set "image.tag=4.0.0"
 
 # Access Application
 http://localhost:<NODE-PORT>
@@ -219,22 +219,22 @@ http://localhost:31231
 ```bash 
 
 # helm history
-helm history RELEASE_NAME
-helm history myapp1
+helm history RELEASE_NAME -n dev 
+helm history myapp1 -n dev 
 
 # Helm Status
-helm status RELEASE_NAME
-helm status myapp1
+helm status RELEASE_NAME -n dev 
+helm status myapp1 -n dev 
 
 # Helm Status - Show Description (display the description message of the named release)
-helm status myapp1 --show-desc    
+helm status myapp1 -n dev  --show-desc    
 
 # Helm Status - Show Resources (display the resources of the named release)
-helm status myapp1  --show-resources   
+helm status myapp1  -n dev  --show-resources   
 
 # Helm Status - revision (display the status of the named release with revision)
-helm status RELEASE_NAME --revision int
-helm status myapp1 --revision 2
+helm status RELEASE_NAME -n dev  --revision int
+helm status myapp1 -n dev  --revision 2
 
 ```
 
@@ -243,7 +243,7 @@ helm status myapp1 --revision 2
 ```bash 
 
 # Uninstall Helm Release
-helm uninstall myapp1
+helm uninstall myapp1 -n dev 
 
 
 
@@ -268,14 +268,14 @@ Observation: Should display specified version of helm chart
 
 
 # Install Helm Chart by specifying Chart Version
-helm install myapp101 stacksimplify/mychart2 --version "CHART-VERSION"
-helm install myapp101 stacksimplify/mychart2 --version "0.1.0"
+helm install myapp101 stacksimplify/mychart2 -n dev  --version "CHART-VERSION"
+helm install myapp101 stacksimplify/mychart2 -n dev  --version "0.1.0"
 
 # List Helm Release
 helm list 
 
 # List Kubernetes Resources Deployed as part of this Helm Release
-helm status myapp101 --show-resources
+helm status myapp101 -n dev  --show-resources
 
 # Access Application
 http://localhost:31232
@@ -285,72 +285,72 @@ kubectl get pods
 kubectl logs -f POD-NAME
 
 # Helm Upgrade using Chart Version
-helm upgrade myapp101 stacksimplify/mychart2 --version "0.2.0"
+helm upgrade myapp101 stacksimplify/mychart2 -n dev  --version "0.2.0"
 
 # List Helm Release
 helm list 
 
 # List Kubernetes Resources Deployed as part of this Helm Release
-helm status myapp101 --show-resources
+helm status myapp101 -n dev  --show-resources
 
 # Access Application
 http://localhost:31232
 
 # List Release History
-helm history myapp101
+helm history myapp101 -n dev 
 
 
 # Helm Upgrade using Chart Version
 helm upgrade myapp101 stacksimplify/mychart2
 
 # List Helm Release
-helm list 
+helm list -n dev 
 
 # List Kubernetes Resources Deployed as part of this Helm Release
-helm status myapp101 --show-resources
+helm status myapp101 -n dev  --show-resources
 
 # Access Application
 http://localhost:31232
 Observation: Should take the latest release which is Appversion 4.0.0, Chart Version 0.4.0 (Which is default or latest Chart version)
 
 # List Release History
-helm history myapp101
+helm history myapp101 -n dev 
 
 
 # Rollback to previous version
 helm rollback RELEASE-NAME 
-helm rollback myapp101
+helm rollback myapp101 -n dev 
 
 # List Helm Release
-helm list 
+helm list -n dev 
 
 # List Kubernetes Resources Deployed as part of this Helm Release
-helm status myapp101 --show-resources
+helm status myapp101 -n dev  --show-resources
 
 # Access Application
 http://localhost:31232
 Observation: Should see V2 version of Application (Chart Version 0.2.0, AppVersion 2.0.0)
 
 # List Release History
-helm history myapp101
+helm history myapp101 -n dev 
 
 
 # Rollback to previous version
 helm rollback RELEASE-NAME REVISION
-helm rollback myapp101 1
+helm rollback myapp101 1 -n dev 
 
 # List Helm Release
-helm list 
+helm list  -n dev 
 
 # List Kubernetes Resources Deployed as part of this Helm Release
-helm status myapp101 --show-resources
+helm status myapp101 -n dev --show-resources
 
 # Access Application
 http://localhost:31232
 Observation: Should see V1 version of Application (Chart Version 0.1.0, AppVersion 1.0.0)
 
 # List Release History
-helm history myapp101
+helm history myapp101 -n dev 
 
 ```
 
@@ -360,38 +360,38 @@ helm history myapp101
 ```bash 
 
 # Install Helm Chart 
-helm install qa101 stacksimplify/mychart1
+helm install qa101 stacksimplify/mychart1 -n dev 
 
 # List Helm Release
-helm list 
+helm list -n dev 
 
 # List Kubernetes Resources Deployed as part of this Helm Release
-helm status qa101 --show-resources
+helm status qa101 -n dev --show-resources
 
 # Access Application
 http://localhost:31231
 
 
-helm install qa101 stacksimplify/mychart1
+helm install qa101 stacksimplify/mychart1 -n dev 
 
 # List Helm Release
-helm list 
+helm list -n dev 
 Observation: You should see qa101 release installed with FAILED status
 
 Error: INSTALLATION FAILED: 1 error occurred:
 	* Service "qa101-mychart1" is invalid: spec.ports[0].nodePort: Invalid value: 31231: provided port is already allocated
 
 # Uninstall qa101 release which is in failed state
-helm uninstall qa101
+helm uninstall qa101 -n dev 
 
 # List Helm Release
-helm list 
+helm list -n dev 
 
 
 helm install qa101 stacksimplify/mychart1 --atomic
 
 # List Helm Release
-helm list 
+helm list -n dev 
 Observation: We will not see qa101 FAILED release, --atomic flag deleted the release as soon as it is failed with error
 
 Error: INSTALLATION FAILED: 1 error occurred:
@@ -400,9 +400,9 @@ Error: INSTALLATION FAILED: 1 error occurred:
 
 
 # Uninstall dev101 release
-helm uninstall dev101
+helm uninstall qa101 -n dev 
 
 # List Helm Releases
-helm list
+helm list -n dev 
 
 ```

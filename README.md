@@ -97,5 +97,43 @@ helm list --output=json
 helm list --namespace=default
 helm list -n default
 
+List Helm Releases with dev namespace
 helm list -n dev 
+```
+
+## List Kubernetes Resources
+
+```bash 
+
+# List Kubernetes Pods
+kubectl get pods
+
+# List Kubernetes Services
+kubectl get svc
+Observation: Review the EXTERNAL-IP field and you will see it as localhost. Access the nginx page from local desktop localhost
+
+# Access Nginx Application on local desktop browser
+http://localhost:80
+http://127.0.0.1:80
+
+# Access Application using curl command
+curl http://localhost:80
+curl http://127.0.0.1:80
+
+```
+
+## Uninstall Helm Release - NO FLAGS
+
+```bash 
+
+# List Helm Releases
+helm ls
+
+# Uninstall Helm Release
+helm uninstall <RELEASE-NAME>
+helm uninstall mynginx 
+
+## Uninstall Helm Release from Dev NS
+helm uninstall mynginx -n dev 
+
 ```

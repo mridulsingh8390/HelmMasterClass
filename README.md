@@ -4,9 +4,12 @@
 
 ```bash
 # Install Docker and Kind Cluster env.
-wget https://github.com/mridulsingh8390/K8S-Troubleshooting-Lab/blob/main/Day-0/01-setup-kind-cluster.sh
+
+wget https://raw.githubusercontent.com/mridulsingh8390/K8S-Troubleshooting-Lab/refs/heads/main/Day-0/01-setup-kind-cluster.sh
+wget https://raw.githubusercontent.com/mridulsingh8390/HelmMasterClass/refs/heads/main/install-helm.sh
 
 bash 01-setup-kind-cluster.sh
+bash install-helm.sh 
 
 # Install helm 
 
@@ -76,7 +79,7 @@ helm install <RELEASE-NAME> <repo_name_in_your_local_desktop/chart_name>
 helm install mynginx mybitnami/nginx
 
 # Install helm chart in specific namespace
-helm install mynginx mybitnami/nginx --create-namespace dev 
+helm install mynginx mybitnami/nginx --create-namespace -n dev 
 
 ```
 
@@ -85,7 +88,12 @@ helm install mynginx mybitnami/nginx --create-namespace dev
 
 # List Helm Releases (Default Table Output)
 helm list 
+
+helm list -n dev
+ 
 helm ls
+
+helm ls -n dev
 
 # List Helm Releases (YAML Output)
 helm list --output=yaml

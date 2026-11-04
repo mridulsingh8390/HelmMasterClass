@@ -169,3 +169,62 @@ helm upgrade <RELEASE-NAME> <repo_name_in_your_local_desktop/chart_name> --set <
 helm upgrade mynginx mybitnami/nginx --set "image.tag=1.14.2"
 
 ```
+
+## List Resources after helm upgrade
+
+```bash 
+
+# List Helm Releases
+helm list 
+Observation: We should see Revision as 2
+
+# Additional List commands
+helm list --superseded
+helm list --deployed
+
+# List and Describe Pod
+kubectl get pods
+kubectl describe pod <POD-NAME> 
+Observation: In the Pod Events you should find that "ghcr.io/stacksimplify/kubenginx:2.0.0" is pulled or if already exists on desktop it will be used to create this new pod
+
+# Access Application
+http://localhost:<NODE-PORT>
+http://localhost:31231
+Observation: Version 2 of application should be displayed
+
+```
+
+## Helm History and Status
+
+```bash 
+
+# helm history
+helm history RELEASE_NAME
+
+helm history mynginx
+
+
+# Helm Status
+helm status RELEASE_NAME
+helm status mynginx
+
+# Helm Status - Show Description (display the description message of the named release)
+helm status mynginx --show-desc    
+
+# Helm Status - Show Resources (display the resources of the named release)
+helm status mynginx  --show-resources   
+
+# Helm Status - revision (display the status of the named release with revision)
+helm status RELEASE_NAME --revision int
+helm status mynginx --revision 2
+
+```
+
+## Uninstall Helm Release
+
+```bash 
+
+# Uninstall Helm Release
+helm uninstall mynginx
+
+```

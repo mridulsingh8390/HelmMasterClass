@@ -5,7 +5,7 @@
 ```bash
 # Install Docker and Kind Cluster env.
 
-wget https://raw.githubusercontent.com/mridulsingh8390/K8S-Troubleshooting-Lab/refs/heads/main/Day-0/01-setup-kind-cluster.sh
+wget https://raw.githubusercontent.com/mridulsingh8390/HelmMasterClass/refs/heads/main/01-setup-kind-cluster.sh
 wget https://raw.githubusercontent.com/mridulsingh8390/HelmMasterClass/refs/heads/main/install-helm.sh
 
 bash 01-setup-kind-cluster.sh

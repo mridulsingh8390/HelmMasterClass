@@ -406,3 +406,48 @@ helm uninstall qa101 -n dev
 helm list -n dev 
 
 ```
+
+## Create your first helm chart
+
+```bash
+# Create helmchart
+helm create my-first-chart
+
+my-first-chart/
+├── Chart.yaml
+├── values.yaml
+├── charts/
+├── templates/
+│   ├── deployment.yaml
+│   ├── service.yaml
+│   ├── ingress.yaml
+│   ├── hpa.yaml
+│   ├── serviceaccount.yaml
+│   ├── _helpers.tpl
+│   └── tests/
+└── .helmignore
+
+# verify helmchart
+helm lint my-first-chart
+
+
+# Render Kubernetes YAML without installing
+helm template my-app ./my-first-chart
+
+# Install Helm chart in Kubernetes
+helm install my-app ./my-first-chart -n dev --create-namespace 
+
+
+# Verify deployment
+helm list -n dev
+
+kubectl get all -n dev
+
+kubectl get pods -n dev
+
+# Verify Kubernetes resources
+kubectl get all -n dev
+kubectl get pods -n dev
+kubectl get svc -n dev
+kubectl get deployments -n dev
+```
